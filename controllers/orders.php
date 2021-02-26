@@ -13,7 +13,7 @@ function getGoods(int $order): array {
         FROM `orders` AS O
             LEFT JOIN `order_product` AS op ON op.`id_order` = o.`id`
             LEFT JOIN `goods` AS g ON g.`id` = op.`id_product`
-        WHERE o.`id` = { $order }
+        WHERE o.`id` = {$order}
 QUERY;
 
     if ($result = mysqli_query(getDatabase(), $sql)) {
@@ -36,7 +36,7 @@ function getOrders(bool $all = false): array {
         FROM `orders` AS o
             LEFT JOIN `order_product` AS op ON op.`id_order` = o.`id`
             LEFT JOIN `users` AS u ON u.`id` = o.`id_user`
-        { $where }
+        {$where}
         GROUP BY o.`id` ORDER BY o.`id` DESC
 QUERY;
 
@@ -103,7 +103,7 @@ function cancel_action(): void {
     $sql = <<<QUERY
         UPDATE `orders`
         SET `status` = 'Отменен'
-        WHERE `id` = { $orderId } and `id_user` = { $userId }
+        WHERE `id` = {$orderId} and `id_user` = {$userId}
 QUERY;
 
     if ($result = mysqli_query(getDatabase(), $sql)) {
@@ -137,8 +137,8 @@ function change_action(): void {
 
     $sql = <<<QUERY
         UPDATE `orders`
-        SET `status` = '{ $status }'
-        WHERE `id` = { $id }
+        SET `status` = '{$status}'
+        WHERE `id` = {$id}
 QUERY;
 
     mysqli_query(getDatabase(), $sql);
@@ -157,7 +157,7 @@ function make_action(): void {
     $userId = getUserID();
     $sql = <<<QUERY
         INSERT INTO `orders` (`id_user`, `status`)
-        VALUES ({ $userId }, 'Передан на обработку')
+        VALUES ({$userId}, 'Передан на обработку')
 QUERY;
     if ($result = mysqli_query(getDatabase(), $sql)) {
         $orderId = mysqli_insert_id(getDatabase());
@@ -165,7 +165,7 @@ QUERY;
             $sql = <<<QUERY
                 SELECT `price`
                 FROM `goods`
-                WHERE `id` = { $id }
+                WHERE `id` = {$id}
 QUERY;
 
             $result = mysqli_query(getDatabase(), $sql);
@@ -173,7 +173,7 @@ QUERY;
 
             $sql = <<<QUERY
                 INSERT INTO `order_product` (`id_order`, `id_product`, `price`, `quantity`)
-                VALUES ({ $orderId }, { $id }, '{ $price }', { $quantity })
+                VALUES ({$orderId}, {$id}, '{$price}', {$quantity})
 QUERY;
 
             mysqli_query(getDatabase(), $sql);

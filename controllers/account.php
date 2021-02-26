@@ -87,8 +87,7 @@ function login_action(): void {
 /**
  * Выполняет выход
  */
-function logout_action(): void
-{
+function logout_action(): void {
     sessionLogout();
     changeLocation();
 }

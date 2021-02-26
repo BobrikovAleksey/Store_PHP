@@ -11,10 +11,11 @@ function getGoods(): array {
     $goods = array_keys($_SESSION['cart']);
     if (count($goods) === 0) return [];
 
+    $goodsAsStr = implode(',', $goods);
     $sql = <<<QUERY
         SELECT *
         FROM `goods`
-        WHERE `id` in ({ implode(',', $goods) })
+        WHERE `id` in ({$goodsAsStr})
 QUERY;
 
     if ($result = mysqli_query(getDatabase(), $sql)) {
@@ -75,8 +76,7 @@ function clear_action(): void {
  * Убирает товар из корзины
  * @param bool $all
  */
-function remove_action(bool $all = false): void
-{
+function remove_action(bool $all = false): void {
     if ($id = getProductID() < 0) {
         changeLocation();
         return;
