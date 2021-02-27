@@ -51,7 +51,7 @@ function default_action(): void {
  */
 function add_action(): void {
     if ($id = getProductID() < 0) {
-        changeLocation();
+        redirect();
         return;
     }
 
@@ -61,7 +61,7 @@ function add_action(): void {
     } else {
         $_SESSION['cart'][$id] += 1;
     }
-    changeLocation();
+    redirect();
 }
 
 /**
@@ -69,7 +69,7 @@ function add_action(): void {
  */
 function clear_action(): void {
     $_SESSION['cart'] = [];
-    changeLocation();
+    redirect();
 }
 
 /**
@@ -78,7 +78,7 @@ function clear_action(): void {
  */
 function remove_action(bool $all = false): void {
     if ($id = getProductID() < 0) {
-        changeLocation();
+        redirect();
         return;
     }
 
@@ -88,5 +88,5 @@ function remove_action(bool $all = false): void {
     } else {
         unset($_SESSION['cart'][$id]);
     }
-    changeLocation();
+    redirect();
 }

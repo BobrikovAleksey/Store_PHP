@@ -6,7 +6,7 @@
  */
 function default_action(): void {
     if (empty($_SESSION['login']) or !$_SESSION['login']) {
-        changeLocation('/?p=account&a=login');
+        redirect('/?p=account&a=login');
         return;
     }
 
@@ -33,8 +33,8 @@ function create_action(bool $admin = false): void {
     }
 
     if (empty($_POST['name']) or empty($_POST['email']) or empty($_POST['password'])) {
-        sessionLogout();
-        changeLocation('/?p=account&a=create');
+        logout();
+        redirect('/?p=account&a=create');
         return;
     }
 
@@ -47,13 +47,13 @@ function create_action(bool $admin = false): void {
 QUERY;
 
     if ($result = mysqli_query(getDatabase(), $sql)) {
-        sessionLogin($_POST['name'], $_POST['email']);
-        changeLocation('/?p=account');
+        login($_POST['name'], $_POST['email']);
+        redirect('/?p=account');
         return;
     }
 
-    sessionLogout();
-    changeLocation('/?p=account&a=create');
+    logout();
+    redirect('/?p=account&a=create');
 }
 
 /**
@@ -70,24 +70,24 @@ function login_action(): void {
     }
 
     if (empty($_POST['email']) or empty($_POST['password'])) {
-        sessionLogout();
-        changeLocation('/?p=account&a=login');
+        logout();
+        redirect('/?p=account&a=login');
         return;
     }
 
     if ($result = verifyPassword($_POST['email'], $_POST['password'])) {
-        sessionLogin($result['name'], $result['email'], $result['admin'] > 0);
-        changeLocation('/?p=account');
+        login($result['name'], $result['email'], $result['admin'] > 0);
+        redirect('/?p=account');
         return;
     }
 
-    changeLocation('/?p=account&a=login');
+    redirect('/?p=account&a=login');
 }
 
 /**
  * Выполняет выход
  */
 function logout_action(): void {
-    sessionLogout();
-    changeLocation();
+    logout();
+    redirect();
 }

@@ -40,7 +40,7 @@ function default_action(): void {
  */
 function table_action(): void {
     if (!$_SESSION['login'] or !$_SESSION['admin']) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 

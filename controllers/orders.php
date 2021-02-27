@@ -80,7 +80,7 @@ QUERY;
  */
 function default_action(): void {
     if ($userId = getUserID() < 0) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 
@@ -107,11 +107,11 @@ function cancel_action(): void {
 QUERY;
 
     if ($result = mysqli_query(getDatabase(), $sql)) {
-        changeLocation('/?p=orders');
+        redirect('/?p=orders');
         return;
     }
 
-    changeLocation();
+    redirect();
 }
 
 /**
@@ -119,19 +119,19 @@ QUERY;
  */
 function change_action(): void {
     if (!$_SESSION['login'] or !$_SESSION['admin']) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 
     if (empty($_GET['id']) or !is_numeric($_GET['id']) or empty($_GET['status'])) {
-        changeLocation();
+        redirect();
         return;
     }
 
     $id = (int)$_GET['id'];
     $status = $_GET['status'];
     if (!in_array($status, getStatusList())) {
-        changeLocation();
+        redirect();
         return;
     }
 
@@ -142,7 +142,7 @@ function change_action(): void {
 QUERY;
 
     mysqli_query(getDatabase(), $sql);
-    changeLocation();
+    redirect();
 }
 
 /**
@@ -150,7 +150,7 @@ QUERY;
  */
 function make_action(): void {
     if (count($_SESSION['cart']) === 0) {
-        changeLocation('/?p=cart');
+        redirect('/?p=cart');
         return;
     }
 
@@ -180,11 +180,11 @@ QUERY;
         }
 
         unset($_SESSION['cart']);
-        changeLocation('/?p=orders');
+        redirect('/?p=orders');
         return;
     }
 
-    changeLocation();
+    redirect();
 }
 
 /**
@@ -192,7 +192,7 @@ QUERY;
  */
 function table_action(): void {
     if (!$_SESSION['login'] or !$_SESSION['admin']) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 
@@ -213,7 +213,7 @@ function table_action(): void {
 function view_action(): void {
     $userId = getUserID();
     if ($orderId = getOrderID() < 0 or $userId < 0) {
-        changeLocation('/?p=orders');
+        redirect('/?p=orders');
         return;
     }
 

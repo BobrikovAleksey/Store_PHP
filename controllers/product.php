@@ -114,7 +114,7 @@ QUERY;
 function default_action(): void {
     $id = getProductID();
     if (!$product = getProduct($id)) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 
@@ -132,12 +132,12 @@ function default_action(): void {
  */
 function delete_action(): void {
     if (!isAdmin()) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 
     if ($id = getProductID() < 0) {
-        changeLocation();
+        redirect();
         return;
     }
 
@@ -147,7 +147,7 @@ function delete_action(): void {
 QUERY;
 
     mysqli_query(getDatabase(), $sql);
-    changeLocation();
+    redirect();
 }
 
 /**
@@ -156,7 +156,7 @@ QUERY;
  */
 function insert_action(): void {
     if (!isAdmin()) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 
@@ -177,7 +177,7 @@ function insert_action(): void {
 
     setData($_POST);
     if (!checkData()) {
-        changeLocation('/?p=product&a=insert');
+        redirect('/?p=product&a=insert');
         return;
     }
 
@@ -201,11 +201,11 @@ QUERY;
             mysqli_query(getDatabase(), $sql);
         }
         unset($_SESSION['product']);
-        changeLocation('/?p=goods&a=table');
+        redirect('/?p=goods&a=table');
         return;
     }
 
-    changeLocation();
+    redirect();
 }
 
 /**
@@ -214,7 +214,7 @@ QUERY;
  */
 function update_action(): void {
     if (!isAdmin()) {
-        changeLocation('/?p=goods');
+        redirect('/?p=goods');
         return;
     }
 
@@ -226,7 +226,7 @@ function update_action(): void {
             'button' => 'Изменить',
         ];
         if (!$product = getProduct($id)) {
-            changeLocation();
+            redirect();
             return;
         }
 
@@ -246,7 +246,7 @@ function update_action(): void {
 
     setData($_POST);
     if (!checkData()) {
-        changeLocation('/?p=product&a=update');
+        redirect('/?p=product&a=update');
         return;
     }
 
@@ -289,9 +289,9 @@ QUERY;
             mysqli_query(getDatabase(), $sql);
         }
         unset($_SESSION['product']);
-        changeLocation('/?p=goods&a=table');
+        redirect('/?p=goods&a=table');
         return;
     }
 
-    changeLocation();
+    redirect();
 }

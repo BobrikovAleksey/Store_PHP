@@ -2,19 +2,6 @@
 /** @noinspection SqlNoDataSourceInspection, SqlResolve */
 
 /**
- * Проверяет произведен ли вход
- * @return bool
- */
-function isLogin(): bool {
-    if (empty($_SESSION['user']) or empty($_SESSION['user']['name']) or empty($_SESSION['user']['email'])) {
-        logout();
-        return false;
-    }
-
-    return true;
-}
-
-/**
  * Возвращает пароль с солью
  * @param string $password
  * @return string
