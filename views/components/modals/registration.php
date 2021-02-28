@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <div class="modal fade" id="Modal-Registration" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

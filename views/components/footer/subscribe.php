@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <div class="subscribe">
     <div class="container align-center">
         <hr class="offset-md">

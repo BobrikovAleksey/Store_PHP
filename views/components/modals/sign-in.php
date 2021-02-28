@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel, HtmlUnknownAnchorTarget -->
 <div class="modal fade" id="Modal-SignIn" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -22,7 +23,7 @@
                                        placeholder="Пароль"><br>
 
                                 <button class="btn btn-primary" type="submit">Отправить</button>
-                                <a href="#forgot_password" data-action="Forgot-Password">Восстановить пароль ></a>
+                                <a href="#forgot-password" data-action="Forgot-Password">Восстановить пароль ></a>
                             </form>
                             <br>
                         </div>

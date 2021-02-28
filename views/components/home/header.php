@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownTarget -->
 <header>
     <div class="carousel" data-count="3" data-current="1">
         <div class="items">

@@ -1,3 +1,7 @@
+<?php
+/** @noinspection PhpIncludeInspection */
+?>
+
 <footer>
     <?php include_once getComponentPath('footer/about') ?>
 

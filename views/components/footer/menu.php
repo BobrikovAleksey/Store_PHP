@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="col-sm-3 col-md-3 col-md-offset-1 align-right hidden-sm hidden-xs">
+        <div class="col-sm-3 col-md-5 col-md-offset-1 align-right hidden-sm hidden-xs">
             <h1 class="h4">Юнистор, ООО</h1>
 
             <address>
