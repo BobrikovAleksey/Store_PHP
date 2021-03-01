@@ -15,6 +15,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1, width=320">
 
 <!-- bootstrap & jquery -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
+
+<!-- bootstrap & jquery -->
 <!--suppress HtmlUnknownTarget -->
 <link href="/assets/css/bootstrap.css" rel="stylesheet">
 <!--suppress HtmlUnknownTarget -->
@@ -24,7 +29,6 @@
 <!--suppress HtmlUnknownTarget -->
 <link href="/assets/ionicons-2.0.1/css/ionicons.css" rel="stylesheet">
 <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
-<link type="text/css" href="https://fonts.googleapis.com/css?family=Catamaran:100,300,400,700" rel="stylesheet">
 <!--suppress HtmlUnknownTarget -->
 <link href="/assets/css/custom-scroll/jquery.mCustomScrollbar.css" rel="stylesheet">
 
@@ -76,7 +80,7 @@
 <!--suppress HtmlUnknownTarget -->
 <script src="/assets/js/jquery.touchSwipe.min.js"></script>
 <!--suppress HtmlUnknownTarget -->
-<script src="/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/assets/js/custom-scroll/jquery.mCustomScrollbar.concat.min.js"></script>
 <!--suppress HtmlUnknownTarget -->
 <script src="/assets/js/carousel.js"></script>
 <!--suppress HtmlUnknownTarget -->
