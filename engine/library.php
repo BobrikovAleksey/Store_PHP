@@ -21,7 +21,7 @@ function getDatabase(): mysqli {
             'localhost',
             'root',
             'root',
-            'php_shop',
+            'shop',
             '3366'
         );
     }
@@ -180,6 +180,15 @@ QUERY;
 }
 
 /**
+ * Возвращает путь к компоненту
+ * @param string $component
+ * @return string
+ */
+function getComponentPath(string $component): string {
+    return ROOT_DIR . "/views/components/{$component}.php";
+}
+
+/**
  * Возвращает путь к контроллеру
  * @param string $controller
  * @return string
@@ -206,30 +215,40 @@ function getViewPath(string $template): string {
     return ROOT_DIR . "/views/{$template}";
 }
 
+define('MENU', [
+    'admin.goods' => [ 'title' => 'Работа с <br> товарами', 'link' => '/?p=goods&a=table' ],
+    'admin.orders' => [ 'title' => 'Работа с <br> заказами', 'link' => '/?p=orders&a=table' ],
+    'cart' => [ 'title' => 'Корзина', 'link' => '/?p=cart' ],
+    'store' => [ 'title' => 'Магазин', 'link' => '/?p=store' ],
+    'home' => [ 'title' => 'Главная', 'link' => '/?p=home' ],
+    'orders' => [ 'title' => 'Заказы', 'link' => '/?p=orders' ],
+    'user.account' => [ 'title' => $_SESSION['user']['name'], 'link' => '/?p=account' ],
+    'user.login' => [ 'title' => 'Войти', 'link' => '/?p=account&a=login' ],
+    'user.logout' => [ 'title' => 'Выйти', 'link' => '/?p=account&a=logout' ],
+]);
+
 /**
  * Возвращает главное меню
  * @return array
  */
 function getMenu(): array {
-    $result[] = [ 'title' => 'Главная', 'link' => '/?p=home' ];
-    $result[] = [ 'title' => 'Товары', 'link' => '/?p=goods' ];
+    $result['home'] = MENU['home'];
+    $result['store'] = MENU['store'];
     if (isLogin()) {
-        $orders = countOrders();
-        $orders = $orders > 0 ? " ({$orders})" : '';
-        $result[] = [ 'title' => "Заказы {$orders}",    'link' => '/?p=orders' ];
+        $result['orders'] = MENU['orders'];
+        if ($orders = countOrders() > 0) $result['orders']['title'] .= " ({$orders})";
     }
-    $cart = countCart();
-    $cart = $cart > 0 ? " ({$cart})" : '';
-    $result[] = [ 'title' => "Корзина {$cart}", 'link' => '/?p=cart' ];
+    $result['cart'] = MENU['cart'];
+    if ($cart = countCart() > 0) $result['cart']['title'] .= " ({$cart})";
     if (isAdmin()) {
-        $result[] = [ 'title' => 'Работа с <br> товарами', 'link' => '/?p=goods&a=table' ];
-        $result[] = [ 'title' => 'Работа с <br> заказами', 'link' => '/?p=orders&a=table' ];
+        $result['admin.goods'] = MENU['admin.goods'];
+        $result['admin.orders'] = MENU['admin.orders'];
     }
     if (isLogin()) {
-        $result[] = [ 'title' => $_SESSION['user']['name'], 'link' => '/?p=account' ];
-        $result[] = [ 'title' => 'Выйти', 'link' => '/?p=account&a=logout' ];
+        $result['user.account'] = MENU['user.account'];
+        $result['user.logout'] = MENU['user.logout'];
     } else {
-        $result[] = [ 'title' => 'Войти', 'link' => '/?p=account&a=login' ];
+        $result['user.login'] = MENU['user.login'];
     }
 
     return $result;
@@ -276,13 +295,13 @@ function renderTemplate(string $template, array $params = []): string {
  * @return string
  */
 function render(string $template, array $params = [], string $layout = 'main.php'): string {
-    $content = renderTemplate($template, $params);
     $title = 'Интернет-магазин';
     if (!empty($params['title'])) $title = $params['title'];
 
     return renderTemplate(getLayoutPath($layout), [
+        'page' => $params['page'],
         'title' => $title,
-        'content' => $content,
+        'content' => renderTemplate($template, $params),
         'menu' => getMenu(),
     ]);
 }
@@ -291,7 +310,7 @@ function render(string $template, array $params = [], string $layout = 'main.php
  * Запускает приложение
  */
 function run(): void {
-    $controller = getControllerPath('index.php');
+    $controller = getControllerPath('index');
     if (isset($_GET['p']) and is_file(getControllerPath($_GET['p']))) {
         $controller = getControllerPath($_GET['p']);
     }
