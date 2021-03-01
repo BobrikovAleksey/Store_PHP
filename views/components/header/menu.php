@@ -28,7 +28,7 @@
             <ul class="nav navbar-nav">
                 <?php foreach ($menu as $key => $item) :?>
                     <li class="<?= $key === $page ? 'active' : '' ?>">
-                        <a href="<?= $menu['link'] ?>"><?= $menu['title'] ?></a>
+                        <a href="<?= $item['link'] ?>"><?= $item['title'] ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
