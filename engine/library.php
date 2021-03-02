@@ -219,7 +219,7 @@ define('MENU', [
     'admin.goods' => [ 'title' => 'Работа с <br> товарами', 'link' => '/?p=goods&a=table' ],
     'admin.orders' => [ 'title' => 'Работа с <br> заказами', 'link' => '/?p=orders&a=table' ],
     'cart' => [ 'title' => 'Корзина', 'link' => '/?p=cart' ],
-    'store' => [ 'title' => 'Магазин', 'link' => '/?p=store' ],
+    'catalog' => [ 'title' => 'Каталог', 'link' => '/?p=catalog' ],
     'home' => [ 'title' => 'Главная', 'link' => '/?p=home' ],
     'orders' => [ 'title' => 'Заказы', 'link' => '/?p=orders' ],
     'user.account' => [ 'title' => $_SESSION['user']['name'], 'link' => '/?p=account' ],
@@ -233,7 +233,7 @@ define('MENU', [
  */
 function getMenu(): array {
     $result['home'] = MENU['home'];
-    $result['store'] = MENU['store'];
+    $result['catalog'] = MENU['catalog'];
     if (isLogin()) {
         $result['orders'] = MENU['orders'];
         if ($orders = countOrders() > 0) $result['orders']['title'] .= " ({$orders})";
