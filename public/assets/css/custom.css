@@ -1168,10 +1168,6 @@
 				margin-top: 20px;
 			}
 
-			.checkout form button[type="submit"] {
-				width: 200px;
-			}
-
 			/* Cart */
 				.checkout .checkout-cart {
 					width: 100%;

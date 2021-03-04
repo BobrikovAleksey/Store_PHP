@@ -43,9 +43,9 @@
 </head>
 
 <body>
-<!-- <b>bobrikov.spb@ya.ru : qwerty123 => admin </b><br>-->
-<!-- <b>123@ya.ru : 123 </b><br>-->
-<!-- <b>321@ya.ru : 321 </b><br>-->
+<!-- bobrikov.spb@ya.ru : qwerty123 => admin -->
+<!-- andreev.msk@ya.ru : qwerty -->
+<!-- astryakova.chr@ya.ru : qwerty -->
 
 <?php include_once getComponentPath('header/index') ?>
 

@@ -4,7 +4,7 @@
  */
 ?>
 
-<?php if (!empty($topDesktop) and count($topDesktop) > 3) :?>
+<?php if (!empty($lastDesktop) and count($lastDesktop) > 3) :?>
 
 <section class="products">
     <div class="container">
@@ -12,7 +12,7 @@
         <hr class="offset-lg">
 
         <div class="row">
-            <?php foreach ($topDesktop as $key => $row) :?>
+            <?php foreach ($lastDesktop as $key => $row) :?>
 
                 <div class="col-sm-6 col-md-3 product">
                     <div class="body">

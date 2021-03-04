@@ -1,31 +1,203 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Хост: 127.0.0.1:3366
--- Время создания: Фев 27 2021 г., 12:15
--- Версия сервера: 5.7.29
--- Версия PHP: 7.4.5
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- База данных: `shop`
 --
 
--- --------------------------------------------------------
-
 DROP DATABASE IF EXISTS shop;
 CREATE DATABASE shop;
 USE shop;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `articles`
+--
+
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE `articles` (
+    `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` varchar(128) NOT NULL UNIQUE,
+    `title` varchar(128) NOT NULL,
+    `synopsis` varchar(1024) NOT NULL,
+    `cover` varchar(256) NOT NULL,
+    `cover_text` varchar(64) NOT NULL,
+    `author` varchar(64) NULL,
+
+    `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX `articles_name_idx` (`name`(16)),
+    INDEX `articles_title_idx` (`title`(8)),
+    INDEX `articles_author_idx` (`author`(8))
+) ENGINE=InnoDB COMMENT='Статьи';
+
+--
+-- Дамп данных таблицы `articles`
+--
+
+INSERT INTO `articles` (`id`, `name`, `title`, `cover`, `cover_text`, `author`, `created_at`, `updated_at`, `synopsis`) VALUES
+(1, 'izmeneniya-v-apple-music-apple-sup-i-dr', 'Изменения в Apple Music, Apple, SUP и др.', '/assets/img/blog/img3.jpg', 'Apple Music', 'Админ', '2016-11-29 09:42:13', '2016-11-29 09:42:13',
+ 'Воскресенье - День матери. Подожди, ты забыл? Что ж, благодаря Apple, вы можете записать видео «Снято на iPhone» ко Дню матери, используя этот сайт. Загрузите изображение, введите свое имя, а затем просто опубликуйте, чтобы мама могла насладиться.'),
+(2, 'obzor-hp-chromebook', 'Обзор HP Chromebook', '/assets/img/blog/img4.jpg', 'HP Chromebook', 'Админ', '2016-12-02 12:13:58', '2016-12-02 12:13:58',
+ 'Chromebook 11 G4 от HP ($199) имеет тускло-серую цвет корпуса, которая кричит: «Купите оптом в образовательные учреждения» больше, чем «купите меня». Однако, именно по-этому эта ориентированная на школу модель может валяться в рюкзаках, она может научить своих владельцев обращать больше внимания на качество сборки.'),
+(3, 'macbook-pro-sovershenno-novyj-dlya-biznesa', 'MacBook Pro - совершенно новый для бизнеса', '/assets/img/blog/img2.jpg', 'Кофе', 'Админ', '2016-12-05 09:35:44', '2016-12-05 09:35:44',
+ 'Организации во всем мире осознают потенциал, который Mac дает их сотрудникам, предоставляя им свободу в использовании инструментов, которые они уже знают и любят. Программное и аппаратное обеспечение созданы друг для друга. Поскольку Apple разрабатывает как программное обеспечение, так и аппаратное, каждый Mac обеспечивает максимальное удобство для сотрудников.'),
+(4, 'populyarnye-posty-v-bloge', 'Популярные посты в блоге', '/assets/img/blog/img1.jpg', 'Устройства Apple', 'Админ', '2016-12-07 09:38:29', '2016-12-07 09:38:29',
+ 'Оригинальный iPhone познакомил мир с Multi-Touch, навсегда изменив восприятие технологий людьми. С помощью 3D Touch появилась возможность делать то, что раньше было невозможно. Он чувствует с каким усилием вы нажимаете на дисплей, позволяя Вам делать любые необходимые операции быстрее и проще. Это дает Вам отклик в режиме реального времени в виде легких нажатий от совершенно нового движка Taptic.'),
+(5, 'izmeneniya-v-apple-music-apple-sup-i-dr-copy', 'Изменения в Apple Music, Apple, SUP и др., copy', '/assets/img/blog/img3.jpg', 'Apple Music', 'Админ', '2016-12-29 09:42:13', '2016-12-29 09:42:13',
+    'Воскресенье - День матери. Подожди, ты забыл? Что ж, благодаря Apple, вы можете записать видео «Снято на iPhone» ко Дню матери, используя этот сайт. Загрузите изображение, введите свое имя, а затем просто опубликуйте, чтобы мама могла насладиться.'),
+(6, 'obzor-hp-chromebook-copy', 'Обзор HP Chromebook, copy', '/assets/img/blog/img4.jpg', 'HP Chromebook', 'Админ', '2017-01-02 12:13:58', '2017-01-02 12:13:58',
+    'Chromebook 11 G4 от HP ($199) имеет тускло-серую цвет корпуса, которая кричит: «Купите оптом в образовательные учреждения» больше, чем «купите меня». Однако, именно по-этому эта ориентированная на школу модель может валяться в рюкзаках, она может научить своих владельцев обращать больше внимания на качество сборки.'),
+(7, 'macbook-pro-sovershenno-novyj-dlya-biznesa-copy', 'MacBook Pro - совершенно новый для бизнеса, copy', '/assets/img/blog/img2.jpg', 'Кофе', 'Админ', '2017-01-05 09:35:44', '2017-01-05 09:35:44',
+    'Организации во всем мире осознают потенциал, который Mac дает их сотрудникам, предоставляя им свободу в использовании инструментов, которые они уже знают и любят. Программное и аппаратное обеспечение созданы друг для друга. Поскольку Apple разрабатывает как программное обеспечение, так и аппаратное, каждый Mac обеспечивает максимальное удобство для сотрудников.'),
+(8, 'populyarnye-posty-v-bloge-copy', 'Популярные посты в блоге, copy', '/assets/img/blog/img1.jpg', 'Устройства Apple', 'Админ', '2017-01-07 09:38:29', '2017-01-07 09:38:29',
+    'Оригинальный iPhone познакомил мир с Multi-Touch, навсегда изменив восприятие технологий людьми. С помощью 3D Touch появилась возможность делать то, что раньше было невозможно. Он чувствует с каким усилием вы нажимаете на дисплей, позволяя Вам делать любые необходимые операции быстрее и проще. Это дает Вам отклик в режиме реального времени в виде легких нажатий от совершенно нового движка Taptic.');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `product_type`
+--
+
+DROP TABLE IF EXISTS `product_type`;
+CREATE TABLE `product_type` (
+    `id` smallint UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` varchar(64) NOT NULL UNIQUE,
+    `title` varchar(64) NOT NULL
+) ENGINE=InnoDB COMMENT='Типы товаров';
+
+--
+-- Дамп данных таблицы `product_type`
+--
+
+INSERT INTO `product_type` (`id`, `name`, `title`) VALUES
+(1, 'desktop', 'Настольные компьютеры'),
+(2, 'laptops', 'Ноутбуки'),
+(3, 'tablets', 'Планшеты'),
+(4, 'hybrids', 'Ноутбуки-трансформеры'),
+(5, 'servers', 'Серверы');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `manufacturers`
+--
+
+DROP TABLE IF EXISTS `manufacturers`;
+CREATE TABLE `manufacturers` (
+    `id` smallint UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` varchar(64) NOT NULL UNIQUE,
+    `title` varchar(64) NOT NULL,
+
+    INDEX `manufacturers_name_idx` (`name`(8))
+) ENGINE=InnoDB COMMENT='Производители';
+
+--
+-- Дамп данных таблицы `product_type`
+--
+
+INSERT INTO `manufacturers` (`id`, `name`, `title`) VALUES
+(1, 'apple', 'Apple'),
+(2, 'xiaomi', 'Xiaomi'),
+(3, 'asus', 'Asus'),
+(4, 'lenovo', 'Lenovo'),
+(5, 'microsoft', 'Microsoft'),
+(6, 'hp', 'HP'),
+(7, 'dell', 'Dell');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `goods`
+--
+
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+    `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` varchar(128) NOT NULL UNIQUE,
+    `title` varchar(128) NOT NULL,
+    `cover` varchar(256) NOT NULL,
+    `cover_text` varchar(64) NOT NULL,
+    `product_type_id` smallint UNSIGNED NOT NULL,
+    `manufacturer_id` smallint UNSIGNED NOT NULL,
+    `screen` varchar(8) NOT NULL,
+    `price` decimal(7,2),
+    `sale` decimal(7,2),
+
+    `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX `goods_name_idx` (`name`(16)),
+    INDEX `goods_title_idx` (`title`(8)),
+    INDEX `goods_type_idx` (`product_type_id`)
+) ENGINE=InnoDB COMMENT='Товары';
+
+--
+-- Дамп данных таблицы `goods`
+--
+
+INSERT INTO `goods` (`id`, `name`, `title`, `cover`, `cover_text`, `product_type_id`, `manufacturer_id`, `screen`, `price`, `sale`, `created_at`, `updated_at`) VALUES
+(1, 'mi-pad-2', 'Mi Pad 2', '/assets/img/products/mi-pad-2.jpg', 'Xiaomi Mi Pad 2', 3, 2, '8"', 899.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(2, 'apple-ipad-air', 'Apple iPad Air', '/assets/img/products/ipad-air.jpg', 'Apple iPad Air', 3, 1, '11"', 1099.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(3, 'asus-transformer', 'Asus Transformer', '/assets/img/products/asus-transformer.jpg', 'Asus Transformer', 3, 3, '14"', 987.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(4, 'lenovo-yoga-900', 'Lenovo Yoga 900', '/assets/img/products/lenovo-yoga.jpg', 'Lenovo Yoga 900', 4, 4, '13"', 1899.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(5, 'microsoft-surface-pro', 'Microsoft Surface Pro', '/assets/img/products/surface-pro.jpg', 'Surface Pro', 4, 5, '11"', 2099.99, 2499.99, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(6, 'hp-spectre-x360', 'HP Spectre x360', '/assets/img/products/hp-spectre-x360.jpg', 'HP Spectre x360', 4, 6, '16"', 2994.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(7, 'dell-inspiron-7000', 'Dell Inspiron 7000', 'assets/img/products/dell-inspiron-2in1.jpg', 'Dell Inspiron 7000 2-in-1', 4, 7, '16"', 1994.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(8, 'imac-27-retina', 'iMac 27 Retina', '/assets/img/products/apple-imac-27-retina.jpg', 'Apple iMac 27 Retina', 1, 1, '27"', 2099.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(9, 'surface-studio', 'Surface Studio', '/assets/img/products/microsoft-surface-studio.jpg', 'Microsoft Surface Studio', 1, 5, '28"', 3749.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(10, 'dell-inspion-23', 'Dell Inspion 23', '/assets/img/products/dell-inspiron-23.jpg', 'Dell Inspion 23', 1, 7, '23"', 2100.99, 1987.99, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(11, 'lenovo-ideacenter', 'Lenovo IdeaCenter', '/assets/img/products/lenovo-ideacenter.jpg', 'Lenovo IdeaCenter', 1, 4, '27"', 2487.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(12, 'ipad-mini', 'iPad Mini', '/assets/img/products/ipad-mini.jpg', 'iPad Mini', 3, 1, '8"', 399.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(13, 'hp-chromebook-11', 'HP Chromebook 11', '/assets/img/products/chrome-book-11.jpg', 'HP Chromebook 11', 2, 6, '11"', 279.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00'),
+(14, 'hp-chromebook-14', 'HP Chromebook 14', '/assets/img/products/chrome-book-14.jpg', 'HP Chromebook 14', 2, 6, '14"', 309.99, NULL, '2017-01-01 00:00:00', '2017-01-01 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+    `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `email` varchar(128) UNIQUE NOT NULL,
+    `password` varchar(128) NOT NULL,
+    `firstname` varchar(64) NOT NULL,
+    `lastname` varchar(64),
+    `country` varchar(128),
+    `city` varchar(128),
+    `street` varchar(128),
+    `building` varchar(8),
+    `corpus` varchar(8),
+    `house` smallint UNSIGNED,
+    `flat` int UNSIGNED,
+    `zip` int UNSIGNED,
+    `admin` bit(1) DEFAULT b'0',
+
+    `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX `users_email_idx` (`email`(16)),
+    INDEX `users_firstname_idx` (`firstname`(8)),
+    INDEX `users_country_idx` (`country`),
+    INDEX `users_city_idx` (`city`)
+) ENGINE=InnoDB COMMENT='Пользователи';
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `country`, `city`, `street`, `building`, `corpus`, `house`, `flat`, `zip`, `admin`, `created_at`, `updated_at`) VALUES
+(1, 'andreev.msk@ya.ru', '$2y$10$5b8jQc77aj2v/dKbEuUcd.yXw.LqXppZkDfqvT2tXVaf1Rgg/MIIW', 'Анатолий', 'Андреев', null, null, null, null, null, null, null, null, b'0', '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
+(2, 'bobrikov.spb@ya.ru', '$2y$10$JYrZe5Wmis2iHrnFylXKcOHLfckr/wrSwYaylYFANwz1DpzaBtaGi', 'Алексей', 'Бобриков', null, null, null, null, null, null, null, null, b'1', '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
+(3, 'astryakova.chr@ya.ru', '$2y$10$5b8jQc77aj2v/dKbEuUcd.yXw.LqXppZkDfqvT2tXVaf1Rgg/MIIW', 'Марина', 'Астрякова', null, null, null, null, null, null, null, null, b'0', '2021-02-27 12:13:58', '2021-02-27 12:13:58');
+
+-- --------------------------------------------------------
+
+
+
+
+
 
 --
 -- Структура таблицы `feedbacks`
@@ -63,40 +235,6 @@ INSERT INTO `feedbacks` (`id_user`, `id_product`, `body`, `created_at`, `updated
 (3, 7, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
 (3, 8, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
 (3, 9, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '2021-02-27 12:13:58', '2021-02-27 12:13:58');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `goods`
---
-
-CREATE TABLE `goods` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(192) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `image` bigint(20) UNSIGNED DEFAULT NULL,
-  `price` int(11) DEFAULT '0',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Товары';
-
---
--- Дамп данных таблицы `goods`
---
-
-INSERT INTO `goods` (`id`, `name`, `title`, `description`, `image`, `price`, `created_at`, `updated_at`) VALUES
-(1, 'Apple iPhone Xr 128gb', 'Смартфон Apple iPhone Xr 128GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 1, 50360, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(2, 'Apple iPhone 11 128gb', 'Смартфон Apple iPhone 11 128GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 5, 54900, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(3, 'Apple iPphone 11 Pro Max 256gb', 'Смартфон Apple iPhone 11 Pro Max 256GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 9, 93800, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(4, 'Apple iPhone 12 128GB', 'Смартфон Apple iPhone 12 128GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 13, 84990, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(5, 'Huawei P30 Pro 8/256gb', 'Смартфон HUAWEI P30 Pro 8/256GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 17, 49990, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(6, 'HUAWEI P40 Pro 8/256gb', 'Смартфон HUAWEI P40 Pro 8 ГБ + 256 ГБ Насыщенный синий', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 27, 64990, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(7, 'OnePlus 7T Pro 8/256gb', 'Смартфон OnePlus 7T Pro 8/256GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 28, 48950, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(8, 'OnePlus 8 8/128gb', 'Смартфон OnePlus 8 8/128GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 29, 41480, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(9, 'Samsung Galaxy A71 6/128gb', 'Смартфон Samsung Galaxy A71 6/128GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 33, 22700, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(10, 'Samsung Galaxy Note 10+ 12/256gb', 'Смартфон Samsung Galaxy Note 10+ 12/256GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 39, 63490, '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(11, 'Samsung Galaxy S20 Ultra 5G 12/256gb', 'Смартфон Samsung Galaxy S20 Ultra 5G 12/256GB', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium', 50, 80990, '2021-02-27 12:13:58', '2021-02-27 12:13:58');
 
 -- --------------------------------------------------------
 
@@ -262,32 +400,6 @@ INSERT INTO `order_product` (`id_order`, `id_product`, `price`, `quantity`) VALU
 (4, 11, '47779.00', 3),
 (11, 11, '47779.00', 4),
 (17, 11, '47779.00', 3);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `firstname` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `lastname` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `password` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `email` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` bit(1) DEFAULT b'0',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Пользователи';
-
---
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `password`, `email`, `admin`, `created_at`, `updated_at`) VALUES
-(1, 'Анатолий', 'Андреев', '$2y$10$Q3nbTrKBLB/IoCm4b4E7UeYzNV1zEnsjHWz2.m9cWx/edVCaPfoEu', 'andreev.msk@ya.ru', b'0', '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(2, 'Алексей', 'Бобриков', '$2y$10$JYrZe5Wmis2iHrnFylXKcOHLfckr/wrSwYaylYFANwz1DpzaBtaGi', 'bobrikov.spb@ya.ru', b'1', '2021-02-27 12:13:58', '2021-02-27 12:13:58'),
-(3, 'Марина', 'Астрякова', '$2y$10$fn6Ogh8J638WSlUPtSixLekLkfN7X0zOjXZFK2WXr/BJB1RSaGB7i', 'astryakova.chr@ya.ru', b'0', '2021-02-27 12:13:58', '2021-02-27 12:13:58');
 
 --
 -- Индексы сохранённых таблиц

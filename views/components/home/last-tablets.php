@@ -1,18 +1,18 @@
 <?php
 /**
- * @var array $topHybrids
+ * @var array $topTablets
  */
 ?>
 
-<?php if (!empty($topHybrids) and count($topHybrids) > 3) :?>
+<?php if (!empty($lastTablets) and count($lastTablets) > 3) :?>
 
 <section class="products">
     <div class="container">
-        <h2 class="h2 upp align-center">Ноутбуки-трансформеры</h2>
+        <h2 class="h2 upp align-center">Планшеты</h2>
         <hr class="offset-lg">
 
         <div class="row">
-            <?php foreach ($topHybrids as $key => $row) :?>
+            <?php foreach ($lastTablets as $key => $row) :?>
 
             <div class="col-sm-6 col-md-4 product <?= $key > 2 ? 'visible-sm' : '' ?>">
                 <div class="body">
@@ -42,7 +42,7 @@
         <div class="align-right align-center-xs">
             <hr class="offset-sm">
 
-            <a href="/"><h5 class="upp">Посмотреть все устройства</h5></a>
+            <a href="/"><h5 class="upp">Посмотреть все планшеты</h5></a>
         </div>
     </div>
 </section>
