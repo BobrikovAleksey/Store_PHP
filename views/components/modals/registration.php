@@ -1,4 +1,4 @@
-<!--suppress HtmlFormInputWithoutLabel -->
+<!--suppress HtmlFormInputWithoutLabel, HtmlUnknownAnchorTarget -->
 <div class="modal fade" id="Modal-Registration" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -15,25 +15,25 @@
                             <h2 class="modal-title text-center">Регистрация</h2>
                             <br>
 
-                            <form class="join" action="#" method="post">
-                                <input class="form-control" type="text" name="name" value="" required
-                                       placeholder="Имя">
+                            <form class="join" action="/?p=account&a=create" method="post">
+                                <input class="form-control" type="text" name="name" placeholder="Введите Ваше имя"
+                                       value="" required>
                                 <br>
 
-                                <input class="form-control" type="email" name="email" value="" required
-                                       placeholder="E-mail">
+                                <input class="form-control" type="email" name="email" placeholder="E-mail" value=""
+                                       required>
                                 <br>
 
-                                <input class="form-control" type="password" name="password" value="" required
-                                       placeholder="Пароль">
+                                <input class="form-control" type="password" name="password" placeholder="Введите пароль"
+                                       value="" required>
                                 <br>
 
-                                <input class="form-control" type="password" name="confirm" value="" required
-                                       placeholder="Подтвердите пароль">
+                                <input class="form-control" type="password" name="confirm"
+                                       placeholder="Введите пароль повторно" value="" required>
                                 <br>
 
                                 <button class="btn btn-primary btn-sm" type="submit" >Отправить</button> &nbsp;&nbsp;
-                                <a href="/">Условия ></a>
+                                <a href="#terms">Условия ></a>
                                 <br><br>
 
                                 <p class="text">

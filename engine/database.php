@@ -58,8 +58,12 @@ QUERY,
            HAVING `product_count` > 0
 QUERY,
     'Users' => <<<QUERY
-        SELECT *
-        FROM `users`
+           SELECT *
+             FROM `users`
+QUERY,
+    'AddUser' => <<<QUERY
+      INSERT INTO `users` (`email`, `password`, `firstname`, `admin`)
+           VALUES ('{{email}}', '{{password}}', '{{name}}', '{{admin}}')
 QUERY,
 ];
 
